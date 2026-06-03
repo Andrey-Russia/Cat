@@ -1,5 +1,5 @@
 using UnityEngine;
-using TMPro; 
+using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections;
 
@@ -7,24 +7,24 @@ using System.Collections;
 public class InteractiveButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Анимация")]
-    [SerializeField] private Vector3 _defaultScale = new Vector3(1f, 1f, 1f);
+    [SerializeField] private Vector3 _defaultScale = new(1f, 1f, 1f);
     [SerializeField] private float _hoverScaleMultiplier = 1.2f;
     [SerializeField][Range(0.1f, 5f)] private float _scaleSpeed = 2f;
 
     [Header("Прозрачность (Текст)")]
-    [SerializeField] private TMP_Text _buttonText; 
+    [SerializeField] private TMP_Text _buttonText;
     [SerializeField][Range(0f, 1f)] private float _textDefaultAlpha = 1f;
     [SerializeField][Range(0f, 1f)] private float _textHoverMinAlpha = 0.6f;
     [SerializeField][Range(0.1f, 5f)] private float _alphaSpeed = 2f;
 
     [Header("Звук")]
     [SerializeField] private AudioClip _clickSound;
+    [SerializeField] private AudioClip _errorSound;
     [SerializeField][Range(0f, 1f)] private float _soundVolume = 1f;
 
-    // --- Приватные поля ---
     private RectTransform _rectTransform;
     private Color _currentTextColor;
-    private bool _isHovering = false;
+    private bool _isHovering;
     private Coroutine _animationCoroutine;
 
     private void Awake()
@@ -56,31 +56,46 @@ public class InteractiveButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlayClickSound();
+        // Пусто.
+        // Звуки теперь вызываются из скриптов покупки.
     }
 
     private IEnumerator AnimateButton()
     {
         while (true)
         {
-            Vector3 targetScale = _isHovering ? _defaultScale * _hoverScaleMultiplier : _defaultScale;
-            float targetAlpha = _isHovering ? _textHoverMinAlpha : _textDefaultAlpha;
+            Vector3 targetScale = _isHovering
+                ? _defaultScale * _hoverScaleMultiplier
+                : _defaultScale;
 
-            _rectTransform.localScale = Vector3.Lerp(_rectTransform.localScale, targetScale, Time.unscaledDeltaTime * _scaleSpeed);
+            float targetAlpha = _isHovering
+                ? _textHoverMinAlpha
+                : _textDefaultAlpha;
+
+            _rectTransform.localScale = Vector3.Lerp(
+                _rectTransform.localScale,
+                targetScale,
+                Time.unscaledDeltaTime * _scaleSpeed);
 
             if (_buttonText != null)
             {
-                _currentTextColor.a = Mathf.Lerp(_currentTextColor.a, targetAlpha, Time.unscaledDeltaTime * _alphaSpeed);
+                _currentTextColor.a = Mathf.Lerp(
+                    _currentTextColor.a,
+                    targetAlpha,
+                    Time.unscaledDeltaTime * _alphaSpeed);
+
                 _buttonText.color = _currentTextColor;
             }
 
-            bool scaleReached = Vector3.Distance(_rectTransform.localScale, targetScale) < 0.01f;
-            bool alphaReached = _buttonText == null || Mathf.Abs(_currentTextColor.a - targetAlpha) < 0.01f;
+            bool scaleReached =
+                Vector3.Distance(_rectTransform.localScale, targetScale) < 0.01f;
+
+            bool alphaReached =
+                _buttonText == null ||
+                Mathf.Abs(_currentTextColor.a - targetAlpha) < 0.01f;
 
             if (scaleReached && alphaReached)
-            {
                 break;
-            }
 
             yield return null;
         }
@@ -95,15 +110,30 @@ public class InteractiveButton : MonoBehaviour, IPointerEnterHandler, IPointerEx
         }
     }
 
-    private void PlayClickSound()
+    public void PlaySuccessSound()
     {
-        if (_clickSound == null) return;
+        PlaySound(_clickSound);
+    }
 
-        GameObject soundObject = new GameObject("OneShot Click Sound");
-        AudioSource audioSource = soundObject.AddComponent<AudioSource>();
+    public void PlayErrorSound()
+    {
+        PlaySound(_errorSound);
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip == null)
+            return;
+
+        GameObject soundObject = new("OneShot Sound");
+
+        AudioSource audioSource =
+            soundObject.AddComponent<AudioSource>();
+
         audioSource.volume = _soundVolume;
-        audioSource.PlayOneShot(_clickSound);
-        Destroy(soundObject, _clickSound.length);
+        audioSource.PlayOneShot(clip);
+
+        Destroy(soundObject, clip.length);
     }
 
     private void SetTextAlpha(float alpha)
