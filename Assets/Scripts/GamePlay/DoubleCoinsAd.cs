@@ -12,5 +12,7 @@ public class DoubleCoinsAd : MonoBehaviour
     {
         AutoMinerManager.Instance
             .ActivateIncomeBoost(2f, 60f);
+
+        Debug.Log("Выдан x2 бонус");
     }
 }
