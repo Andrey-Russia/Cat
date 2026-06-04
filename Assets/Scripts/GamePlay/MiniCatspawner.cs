@@ -22,7 +22,7 @@ public class MiniCatSpawner : MonoBehaviour
 
     private void UpdatePositions()
     {
-        float radius = 250f;
+        float radius = 500f;
 
         for (int i = 0; i < _spawnedCats.Count; i++)
         {

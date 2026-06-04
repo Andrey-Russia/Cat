@@ -8,6 +8,8 @@ public class OfflineIncomeManager : MonoBehaviour
     [SerializeField] private int _maxOfflineHours = 8;
     [SerializeField] private GameObject _rewardPanel;
     [SerializeField] private TMP_Text _rewardText;
+
+
     private void Start()
     {
         CalculateOfflineIncome();
@@ -38,6 +40,8 @@ public class OfflineIncomeManager : MonoBehaviour
 
     private void CalculateOfflineIncome()
     {
+        Debug.Log("hasExitedGame = " + YG2.saves.hasExitedGame);
+        Debug.Log("lastExitTime = " + YG2.saves.lastExitTime);
         if (!YG2.saves.hasExitedGame)
         {
             return;

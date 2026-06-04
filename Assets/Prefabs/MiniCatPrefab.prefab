@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8128144267054664146}
   - component: {fileID: 8453334393630537146}
-  - component: {fileID: 8424673810014901799}
+  - component: {fileID: 7526996956452872048}
   m_Layer: 0
   m_Name: MiniCatPrefab
   m_TagString: Untagged
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505323158571236252}
   m_CullTransparentMesh: 1
---- !u!114 &8424673810014901799
+--- !u!114 &7526996956452872048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,13 +59,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3266922754343899043, guid: 39ab22ac202cae64f864dd080509f363, type: 3}
+  m_Sprite: {fileID: -4309711481366743037, guid: 685ad58d06d321a4e88f3438ba8cde59, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

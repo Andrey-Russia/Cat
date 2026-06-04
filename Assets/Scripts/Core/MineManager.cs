@@ -17,7 +17,9 @@ public class MineManager : MonoBehaviour
         500,
         2000,
         10000,
-        50000
+        50000,
+        250000,
+        1000000
     };
 
 

@@ -27,9 +27,8 @@ public class ResetProgressButton : MonoBehaviour
 
         YG2.saves.firstLaunch = true;
 
-        YG2.saves.lastExitTime =
-            System.DateTime.UtcNow.ToString();
-
+        YG2.saves.hasExitedGame = false;
+        YG2.saves.lastExitTime = "";
         YG2.SaveProgress();
 
         SceneManager.LoadScene(
