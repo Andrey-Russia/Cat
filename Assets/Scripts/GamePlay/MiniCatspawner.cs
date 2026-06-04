@@ -4,9 +4,11 @@ using UnityEngine;
 public class MiniCatSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _miniCatPrefab;
-    [SerializeField] private Transform _container;
+    [SerializeField] private RectTransform _container;
 
-    private readonly List<GameObject> _spawnedCats = new();
+    [SerializeField] private float _radius = 250f;
+
+    private readonly List<RectTransform> _cats = new();
 
     public void SpawnCat()
     {
@@ -15,28 +17,42 @@ public class MiniCatSpawner : MonoBehaviour
                 _miniCatPrefab,
                 _container);
 
-        _spawnedCats.Add(cat);
+        RectTransform rect =
+            cat.GetComponent<RectTransform>();
 
-        UpdatePositions();
+        _cats.Add(rect);
+
+        RebuildCircle();
     }
 
-    private void UpdatePositions()
+    private void RebuildCircle()
     {
-        float radius = 500f;
+        int count = _cats.Count;
 
-        for (int i = 0; i < _spawnedCats.Count; i++)
+        if (count == 0)
+            return;
+
+        if (count == 1)
+        {
+            _cats[0].anchoredPosition = Vector2.zero;
+            return;
+        }
+
+        for (int i = 0; i < count; i++)
         {
             float angle =
-                i * Mathf.PI * 2f / _spawnedCats.Count;
+                (360f / count) * i;
 
-            Vector2 position =
-                new(
-                    Mathf.Cos(angle) * radius,
-                    Mathf.Sin(angle) * radius);
+            float rad =
+                angle * Mathf.Deg2Rad;
 
-            _spawnedCats[i]
-                .GetComponent<RectTransform>()
-                .anchoredPosition = position;
+            Vector2 pos =
+                new Vector2(
+                    Mathf.Cos(rad),
+                    Mathf.Sin(rad))
+                * _radius;
+
+            _cats[i].anchoredPosition = pos;
         }
     }
 }
