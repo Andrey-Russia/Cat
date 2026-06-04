@@ -1,0 +1,25 @@
+{
+    "intExample": 5,
+    "strExample": "Hello!",
+    "boolExample": [
+        false,
+        false,
+        false,
+        false
+    ],
+    "idSave": 639,
+    "coins": 40,
+    "clickLevel": 0,
+    "catLevel": 0,
+    "catCount": 0,
+    "totalCoinsEarned": 0,
+    "tutorialCompleted": false,
+    "firstLaunch": false,
+    "achievementFirstCoin": false,
+    "achievement100Coins": false,
+    "achievement1000Coins": false,
+    "achievementFirstCat": false,
+    "achievement10Cats": false,
+    "hasExitedGame": true,
+    "lastExitTime": "04.06.2026 8:06:07"
+}

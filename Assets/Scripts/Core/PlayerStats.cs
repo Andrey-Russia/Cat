@@ -23,4 +23,9 @@ public class PlayerStats : MonoBehaviour
     {
         _clickPower += amount;
     }
+
+    public void SetClickPower(int value)
+    {
+        _clickPower = value;
+    }
 }

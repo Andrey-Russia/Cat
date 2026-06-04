@@ -1,12 +1,11 @@
 using UnityEngine;
+using YG;
 
 public class CurrencyManager : MonoBehaviour
 {
     public static CurrencyManager Instance { get; private set; }
 
     [SerializeField] private int _coins;
-
-    private const string CoinsKey = "Coins";
 
     public int Coins => _coins;
 
@@ -23,13 +22,32 @@ public class CurrencyManager : MonoBehaviour
 
     private void Start()
     {
-        Load();
+        _coins = YG2.saves.coins;
+
+        if (YG2.saves.firstLaunch)
+        {
+            _coins = 40;
+
+            YG2.saves.coins = 40;
+
+            YG2.saves.lastExitTime =
+                System.DateTime.UtcNow.ToString();
+
+            YG2.saves.firstLaunch = false;
+
+            YG2.SaveProgress();
+        }
     }
 
     public void AddCoins(int amount)
     {
         _coins += amount;
-        Save();
+
+        YG2.saves.coins = _coins;
+
+        YG2.saves.totalCoinsEarned += amount;
+
+        AchievementManager.Instance.CheckAchievements();
     }
 
     public bool SpendCoins(int amount)
@@ -38,19 +56,14 @@ public class CurrencyManager : MonoBehaviour
             return false;
 
         _coins -= amount;
-        Save();
+
+        YG2.saves.coins = _coins;
 
         return true;
     }
 
-    private void Save()
+    public void LoadFromCloud()
     {
-        PlayerPrefs.SetInt(CoinsKey, _coins);
-        PlayerPrefs.Save();
-    }
-
-    private void Load()
-    {
-        _coins = PlayerPrefs.GetInt(CoinsKey, 0);
+        _coins = YG2.saves.coins;
     }
 }
