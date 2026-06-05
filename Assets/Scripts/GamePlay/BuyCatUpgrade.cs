@@ -16,7 +16,7 @@ public class BuyCatUpgrade : MonoBehaviour
 
     private void Update()
     {
-        _priceText.text = $"Автокот | LVL {_level} | {CurrentPrice}";
+        _priceText.text = $"Автокот | Уровень {_level} | {CurrentPrice}";
     }
 
     public void Buy()

@@ -38,7 +38,7 @@ public class MineManager : MonoBehaviour
         UpdateProgressBar();
         UpdateBackground();
 
-        _mineLevelText.text = $"Шахта LVL {_currentMineLevel}";
+        _mineLevelText.text = $"Шахта уровень {_currentMineLevel}";
     }
 
     private void UpdateMineLevel()

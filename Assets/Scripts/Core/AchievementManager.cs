@@ -90,7 +90,7 @@ public class AchievementManager : MonoBehaviour
         _achievementPanel.SetActive(true);
 
         _achievementText.text =
-            $"🏆 Достижение открыто!\n\n{achievementName}";
+            $"Достижение открыто!\n\n{achievementName}";
 
         Invoke(nameof(HidePanel), 3f);
 

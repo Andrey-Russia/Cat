@@ -16,7 +16,7 @@ public class ClickUpgrade : MonoBehaviour
 
     private void Update()
     {
-        _priceText.text = $"Клик +1 | LVL {_level} | {CurrentPrice}";
+        _priceText.text = $"Клик +1 | Уровень {_level} | {CurrentPrice}";
     }
 
     public void Buy()

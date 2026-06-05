@@ -19,6 +19,8 @@ namespace YG
         public bool achievement10Cats;
         public bool hasExitedGame;
 
+        public bool soundEnabled = true;
+
         public string lastExitTime;
     }
 }

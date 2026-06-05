@@ -7,19 +7,20 @@
         false,
         false
     ],
-    "idSave": 1668,
-    "coins": 2329,
-    "clickLevel": 3,
-    "catLevel": 9,
-    "catCount": 9,
-    "totalCoinsEarned": 6565,
+    "idSave": 1861,
+    "coins": 69557,
+    "clickLevel": 18,
+    "catLevel": 17,
+    "catCount": 17,
+    "totalCoinsEarned": 443640,
     "tutorialCompleted": true,
     "firstLaunch": false,
     "achievementFirstCoin": true,
     "achievement100Coins": true,
     "achievement1000Coins": true,
     "achievementFirstCat": true,
-    "achievement10Cats": false,
+    "achievement10Cats": true,
     "hasExitedGame": true,
-    "lastExitTime": "04.06.2026 13:09:10"
+    "soundEnabled": false,
+    "lastExitTime": "05.06.2026 13:05:36"
 }
